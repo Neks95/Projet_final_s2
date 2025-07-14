@@ -1,11 +1,14 @@
 <?php
 include("../inc/fonction.php");
+session_start();
 $filtre = isset($_GET['filtre']) ? intval($_GET['filtre']) : 0;
 $nom = isset($_GET['nom']) ? $_GET['nom'] : '';
 $dispo = isset($_GET['dispo']);
 $resultat = afficher0bjet($filtre, $nom, $dispo);
 
 $cat = getCategorie();
+
+$emprunts = getMesEmprunt($_SESSION['id']);
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -54,12 +57,12 @@ $cat = getCategorie();
             </div>
         </div>
     </div>
-    <button type="submit" class="btn btn-primary mt-3 w-100">Rechercher</button>
+    <button type="submit" class="btn btn-success mt-3 w-100">Rechercher</button>
 </form>
 
 
 
-
+        <!-- filtre v1 -->
         <!-- <h3>Filtrer les objets</h3>
         <form action="liste.php" method="get">
             <select class="form-select" aria-label="Default select example" name="filtre">
@@ -74,6 +77,19 @@ $cat = getCategorie();
         </form> -->
 
         <a href="upload.php"><button type="button" class="btn btn-dark mt-3">Ajouter un objet</button></a>
+        <br>
+        <br>
+
+        <div class="container">
+            <h2>liste des objets empruntes</h2>
+            <?php foreach ($emprunts as $e) { ?>
+                <h5 class="text-muted fs-5"><?php echo $e['nom_objet']?></h5>
+                <a href="rendre.php?id=<?php echo $e['id_objet']?>"><button type="button" class="btn btn-success mt-3">Rendre l'objet</button></a>
+
+               
+            <?php } ?>
+
+        </div>
 
         <div class="row g-4 mt-5">
             <?php foreach ($resultat as $res) { ?>

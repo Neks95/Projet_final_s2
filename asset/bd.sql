@@ -92,3 +92,8 @@ INSERT INTO projet_final_emprunt (id_objet, id_membre, date_emprunt, date_retour
 (30, 2, '2025-07-08', '2025-07-13'),
 (36, 1, '2025-07-09', '2025-07-18'),
 (38, 3, '2025-07-10', '2025-07-19');
+
+ALTER TABLE projet_final_emprunt
+ADD COLUMN etat_retour VARCHAR(50);
+
+

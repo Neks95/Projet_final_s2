@@ -137,20 +137,36 @@ function getEmprunt($id_objet) {
 
 function Emprunter($id_objet, $id_membre, $date_emprunt, $date_retour)
 {
-    $conn = bdconnect();
+ 
     $requete = "INSERT INTO projet_final_emprunt (id_objet, id_membre, date_emprunt, date_retour)
                 VALUES (%d, %d, '%s', '%s')";
     $requete = sprintf($requete, $id_objet, $id_membre, $date_emprunt, $date_retour);
-    mysqli_query($conn, $requete);
+    mysqli_query(bdconnect(), $requete);
 }
 
 function estDisponible($id_objet)
 {
-    $conn = bdconnect();
+  
     $requete = "SELECT * FROM projet_final_emprunt WHERE id_objet = %d AND CURDATE() <= date_retour";
     $requete = sprintf($requete, $id_objet);
-    $result = mysqli_query($conn, $requete);
-    return (mysqli_num_rows($result) == 0); // true si dispo
+    $result = mysqli_query(bdconnect(), $requete);
+    return (mysqli_num_rows($result) == 0);
+}
+
+
+function getMesEmprunt($idd){
+    $requete = "SELECT * FROM projet_final_emprunt e 
+                JOIN projet_final_membre m ON m.id_membre = e.id_membre 
+                JOIN projet_final_objet o ON e.id_objet = o.id_objet 
+                WHERE e.id_membre = '%s'";
+    $hafa = sprintf($requete,$idd);
+    $result = mysqli_query(bdconnect(), $hafa);
+
+    $emprunt = [];
+    while($ligne = mysqli_fetch_assoc($result)){
+        $emprunt[] = $ligne;
+    }
+    return $emprunt;
 }
 
 ?>

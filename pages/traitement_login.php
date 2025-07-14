@@ -6,7 +6,8 @@ $email = $_POST['email'];
 $mdp = $_POST['mdp'];
 
 $id = getId($email);
-$_SESSION['id']=$id;
+$idd = $id['id_membre'];
+$_SESSION['id'] = $idd;
 
 verif($email,$mdp);
 

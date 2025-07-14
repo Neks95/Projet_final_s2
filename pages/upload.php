@@ -40,7 +40,7 @@ $categories = getCategorie();
                 <label>Images (la première sera l’image principale)</label>
                 <input type="file" name="images[]" multiple class="form-control" accept="image/*" >
             </div>
-            <button type="submit" class="btn btn-primary w-100">Ajouter l'objet</button>
+            <button type="submit" class="btn btn-success w-100">Ajouter l'objet</button>
         </form>
     </div>
 </body>
