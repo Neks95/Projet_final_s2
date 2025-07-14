@@ -7,7 +7,8 @@ function bdconnect()
 {
     static $connect = null;
     if ($connect === null) {
-        $connect = mysqli_connect('localhost','root','','projet_final');
+        // $connect = mysqli_connect('localhost','ETU004092','BjwSIVWn','db_s2_ETU004092');
+            $connect = mysqli_connect('localhost','root','','projet_final');
         if (!$connect) {
             die('Erreur de connexion à la base de données : ' . mysqli_connect_error());
         }

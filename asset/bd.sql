@@ -59,38 +59,26 @@ INSERT INTO projet_final_membre (nom, date_naissance, genre, email, ville, mdp, 
 
 INSERT INTO projet_final_categorie_objet (nom_categorie) VALUES
 ('Esthétique'),
-('Bricolage'),condition
+('Bricolage'),
 ('Mécanique'),
 ('Cuisine');
 
 
 INSERT INTO projet_final_objet (nom_objet, id_categorie, id_membre) VALUES
-
 ('Sèche-cheveux', 1, 1), ('Rouge à lèvres', 1, 1), ('Marteau', 2, 1), ('Tournevis', 2, 1), 
 ('Clé à molette', 3, 1), ('Pompe à vélo', 3, 1), ('Mixeur', 4, 1), ('Casserole', 4, 1),
 ('Peigne', 1, 1), ('Spatule', 4, 1),
-
 
 ('Perceuse', 2, 2), ('Pince', 2, 2), ('Tondeuse', 1, 2), ('Bouilloire', 4, 2),
 ('Cric', 3, 2), ('Fourchette', 4, 2), ('Tournevis électrique', 2, 2), ('Mascara', 1, 2),
 ('Écrou', 3, 2), ('Couteau', 4, 2),
 
-
 ('Poudre', 1, 3), ('Éponge', 4, 3), ('Scie', 2, 3), ('Clé anglaise', 3, 3),
 ('Friteuse', 4, 3), ('Lime', 2, 3), ('Vernis', 1, 3), ('Jack hydraulique', 3, 3),
-('Batteur', 4, 3), ('Ciseaux', 1, 3),
+('Batteur', 4, 3), ('Ciseaux', 1, 3);
 
 
-);
 
-
-CREATE TABLE projet_final_objet (
-    id_objet INT AUTO_INCREMENT PRIMARY KEY,
-    nom_objet VARCHAR(100),
-    id_categorie INT,
-('Spatule en bois', 4, 4), ('Marteau piqueur', 2, 4), ('Pince coupante', 2, 4), ('Crème visage', 1, 4),
-('Pompe manuelle', 3, 4), ('Tapis de cuisson', 4, 4), ('Clé dynamométrique', 3, 4), ('Brosse', 1, 4),
-('Perceuse-visseuse', 2, 4), ('Poêle', 4, 4);
 
 
 INSERT INTO projet_final_emprunt (id_objet, id_membre, date_emprunt, date_retour) VALUES
