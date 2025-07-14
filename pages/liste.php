@@ -1,14 +1,10 @@
 <?php
 include("../inc/fonction.php");
-$resultat = afficher0bjet();
-if (!isset($filtre)) {
-    $filtre = 0;
-}
-else {
-    $filtre = $_GET['filtre'];
-}
 
-$cat = getCategorie($filtre);
+
+$filtre = isset($_GET['filtre']) ? intval($_GET['filtre']) : 0;
+$resultat = afficher0bjet($filtre);
+$cat = getCategorie();
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -30,12 +26,13 @@ $cat = getCategorie($filtre);
         </div>
 
         <form action="liste.php" method="get">
-            <select class="form-select" aria-label="Default select example">
+            <select class="form-select" aria-label="Default select example" name="filtre">
                 <option value="0">tous</option>
                 <?php foreach ($cat as $c) { ?>
                     <option value="<?php echo $c['id_categorie']?>"><?php echo $c['nom_categorie']?></option>
                 <?php } ?>
             </select>
+            <input type="submit" value="filtrer">
         </form>
        
         

@@ -1,57 +1,60 @@
         body {
-            background-color: #f8f9fa;
+            background-color: #a9adb1;
             font-family: 'Segoe UI', system-ui, sans-serif;
+            
         }
-        
+
         .card {
             border: none;
             border-radius: 12px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             overflow: hidden;
         }
-        
+
         .card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
-        
+
         .card-img-top {
             height: 180px;
             object-fit: cover;
-            border-bottom: 1px solid rgba(0,0,0,0.1);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
         }
-        
+
         .card-body {
             padding: 1.25rem;
         }
-        
+
         .card-title {
-               body {
-            background-color: #f8f9fa;
-            font-family: 'Segoe UI', system-ui, sans-serif;
-        }color: #2c3e50;
+            body {
+                background-color: #f8f9fa;
+                font-family: 'Segoe UI', system-ui, sans-serif;
+            }
+
+            color: #2c3e50;
             font-weight: 600;
             margin-bottom: 0.75rem;
         }
-        
+
         .card-text {
             color: #7f8c8d;
             font-size: 0.9rem;
         }
-        
+
         .badge {
             font-weight: 500;
             padding: 0.5em 0.75em;
         }
-        
+
         .bg-success {
             background-color: #2ecc71 !important;
         }
-        
+
         .bg-danger {
             background-color: #e74c3c !important;
         }
-        
+
         h1 {
             color: #2c3e50;
             font-weight: 700;
@@ -59,4 +62,5 @@
             position: relative;
             display: inline-block;
         }
-      
+
+     
