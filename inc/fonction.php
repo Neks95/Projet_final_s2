@@ -30,4 +30,29 @@ function insert_membre($email, $mdp, $nom, $date, $ville, $genre, $pdp)
 
 }
 
+function verif($email, $mdp) {
+    $requete = "SELECT * FROM projet_final_membre WHERE email = '%s' AND mdp = '%s'";
+    $requete = sprintf($requete, $email, $mdp);
+    $resultat = mysqli_query(bdconnect(), $requete);
+    $user = mysqli_fetch_assoc($resultat);
+    if (empty($user)) {
+       header("location:index.php?erreur=1");
+    }
+    else {
+       header("location:liste.php");
+    }
+
+}
+
+function afficher0bjet(){
+    $requete = "SELECT * FROM v_liste_objet";
+    $result = mysqli_query(bdconnect(),$requete);
+    $objet = [];
+    while ($ligne = mysqli_fetch_assoc($result)) {
+        $objet[] = $ligne;
+        
+    }
+    return $objet;
+
+}
 ?>

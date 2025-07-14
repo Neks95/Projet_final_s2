@@ -59,7 +59,7 @@ INSERT INTO projet_final_membre (nom, date_naissance, genre, email, ville, mdp, 
 
 INSERT INTO projet_final_categorie_objet (nom_categorie) VALUES
 ('Esthétique'),
-('Bricolage'),
+('Bricolage'),condition
 ('Mécanique'),
 ('Cuisine');
 
@@ -81,6 +81,13 @@ INSERT INTO projet_final_objet (nom_objet, id_categorie, id_membre) VALUES
 ('Batteur', 4, 3), ('Ciseaux', 1, 3),
 
 
+);
+
+
+CREATE TABLE projet_final_objet (
+    id_objet INT AUTO_INCREMENT PRIMARY KEY,
+    nom_objet VARCHAR(100),
+    id_categorie INT,
 ('Spatule en bois', 4, 4), ('Marteau piqueur', 2, 4), ('Pince coupante', 2, 4), ('Crème visage', 1, 4),
 ('Pompe manuelle', 3, 4), ('Tapis de cuisson', 4, 4), ('Clé dynamométrique', 3, 4), ('Brosse', 1, 4),
 ('Perceuse-visseuse', 2, 4), ('Poêle', 4, 4);
