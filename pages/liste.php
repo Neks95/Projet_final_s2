@@ -1,7 +1,10 @@
 <?php
 include("../inc/fonction.php");
 $filtre = isset($_GET['filtre']) ? intval($_GET['filtre']) : 0;
-$resultat = afficher0bjet($filtre);
+$nom = isset($_GET['nom']) ? $_GET['nom'] : '';
+$dispo = isset($_GET['dispo']);
+$resultat = afficher0bjet($filtre, $nom, $dispo);
+
 $cat = getCategorie();
 ?>
 <!DOCTYPE html>
@@ -25,32 +28,34 @@ $cat = getCategorie();
         <br>
         <h3>rechercher</h3>
 
-        <form action="liste.php" method="GET" class="p-3 shadow rounded bg-light">
-            <div class="form-group mb-3">
-                <form action="resultat.php" method="GET" class="p-3 shadow rounded bg-light">
-                    <div class="form-group mb-3">
-                        <label for="departement" class="form-label">Categorie</label>
-                        <select name="departement" id="departement" class="form-select">
-                            <option value="0">tous </option>
-                             <?php foreach ($cat as $c) { ?>
-                        <option value="<?php echo $c['id_categorie'] ?>" <?php echo ($filtre == $c['id_categorie']) ? 'selected' : ''; ?>>
-                        <?php echo $c['nom_categorie'] ?>
-                        </option>
-                      <?php } ?>
-                           
-                        </select>
-                    </div>
-
-        
-                    <div class="form-group mb-3">
-                        <label for="nom" class="form-label">Nom :</label>
-                        <input type="text" class="form-control" name="nom">
-                    </div>
-
-
-                    <button type="submit" class="btn btn-secondary w-100">Rechercher</button>
-                </form>
-    
+   <form action="liste.php" method="GET" class="p-3 shadow rounded bg-light mb-4">
+    <div class="row g-3">
+        <div class="col-md-4">
+            <label for="filtre" class="form-label">Catégorie</label>
+            <select name="filtre" id="filtre" class="form-select">
+                <option value="0">Toutes</option>
+                <?php foreach ($cat as $c) { ?>
+                    <option value="<?= $c['id_categorie'] ?>" <?= ($filtre == $c['id_categorie']) ? 'selected' : '' ?>>
+                        <?= $c['nom_categorie'] ?>
+                    </option>
+                <?php } ?>
+            </select>
+        </div>
+        <div class="col-md-4">
+            <label for="nom" class="form-label">Nom de l’objet</label>
+            <input type="text" name="nom" id="nom" class="form-control" value="<?= $_GET['nom'] ?? '' ?>">
+        </div>
+        <div class="col-md-4 d-flex align-items-end">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="dispo" id="dispo" <?= isset($_GET['dispo']) ? 'checked' : '' ?>>
+                <label class="form-check-label" for="dispo">
+                    Uniquement disponibles
+                </label>
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary mt-3 w-100">Rechercher</button>
+</form>
 
 
 
@@ -91,11 +96,11 @@ $cat = getCategorie();
                                 <div class="mt-auto">
                                     <?php if (!empty($res['date_retour'])) { ?>
                                         <span class="badge bg-danger w-100">
-                                            Jusqu'au <?php echo ($res['date_retour']); ?>
+                                            Disponible le <?php echo ($res['date_retour']); ?>
                                         </span>
                                     <?php } else { ?>
-                                        <span class="badge bg-success w-100">
-                                            Disponible
+                                        <span class="badge w-100">
+                                           <button class="btn-secondary"><a href="emprunt.php?id=<?php echo $res['id_objet']; ?>">Emprunter</a></button>
                                         </span>
                                     <?php } ?>
                                 </div>

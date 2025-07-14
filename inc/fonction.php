@@ -51,27 +51,32 @@ function verif($email, $mdp)
 
 }
 
-function afficher0bjet($filtre)
-
+function afficher0bjet($filtre, $nom = '', $dispo = false)
 {
     $objet = [];
-    if ($filtre == 0) {
-        $requete = "SELECT * FROM v_liste_objet";
-        $result = mysqli_query(bdconnect(), $requete);
-        while ($ligne = mysqli_fetch_assoc($result)) {
-            $objet[] = $ligne;
+    $conn = bdconnect();
+    $conditions = "WHERE 1=1";  // base toujours vraie
 
-        }
+    if ($filtre > 0) {
+        $conditions .= " AND id_categorie = " . intval($filtre);
     }
-    else {
-        $requete = "SELECT * FROM v_liste_objet WHERE id_categorie = '%s'";
-        $requete = sprintf($requete,$filtre);
-        $result = mysqli_query(bdconnect(), $requete);
-        while ($ligne = mysqli_fetch_assoc($result)) {
-            $objet[] = $ligne;
 
-        }
+    if (!empty($nom)) {
+        $nom_safe = mysqli_real_escape_string($conn, $nom);
+        $conditions .= " AND nom_objet LIKE '%$nom_safe%'";
     }
+
+    if ($dispo) {
+        $conditions .= " AND date_retour IS NULL";
+    }
+
+    $requete = "SELECT * FROM v_liste_objet $conditions";
+    $result = mysqli_query($conn, $requete);
+
+    while ($ligne = mysqli_fetch_assoc($result)) {
+        $objet[] = $ligne;
+    }
+
     return $objet;
 }
 
@@ -129,4 +134,23 @@ function getEmprunt($id_objet) {
     }
     return $history;
 }
+
+function Emprunter($id_objet, $id_membre, $date_emprunt, $date_retour)
+{
+    $conn = bdconnect();
+    $requete = "INSERT INTO projet_final_emprunt (id_objet, id_membre, date_emprunt, date_retour)
+                VALUES (%d, %d, '%s', '%s')";
+    $requete = sprintf($requete, $id_objet, $id_membre, $date_emprunt, $date_retour);
+    mysqli_query($conn, $requete);
+}
+
+function estDisponible($id_objet)
+{
+    $conn = bdconnect();
+    $requete = "SELECT * FROM projet_final_emprunt WHERE id_objet = %d AND CURDATE() <= date_retour";
+    $requete = sprintf($requete, $id_objet);
+    $result = mysqli_query($conn, $requete);
+    return (mysqli_num_rows($result) == 0); // true si dispo
+}
+
 ?>

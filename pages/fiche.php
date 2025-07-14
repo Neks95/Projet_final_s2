@@ -60,7 +60,7 @@ $emprunts = getEmprunt($id_objet);
 
                     <h4 class="mt-4 mb-3"><i class="fas fa-history me-2"></i>Historique</h4>
                     <?php if (empty($emprunts)): ?>
-                        <p class="text-muted">Aucun emprunt </p>
+                        <a href=""><p class="text-muted">Aucun emprunt </p></a>
                     <?php else: ?>
                         <?php foreach ($emprunts as $emprunt): ?>
                             <div class="history-item">
@@ -71,12 +71,18 @@ $emprunts = getEmprunt($id_objet);
                                             Emprunté le <?= date('d/m/Y', strtotime($emprunt['date_emprunt'])) ?>
                                         </div>
                                     </div>
-                                    <?php if (empty($emprunt['date_retour'])): ?>
-                                        <span class="badge bg-warning">En cours</span>
+                                  <?php if (!empty($emprunt['date_retour'])): ?>
+                                    <?php if (strtotime($emprunt['date_retour']) > time()): ?>
+                                        <div class="text-muted small text-primary">
+                                            Sera rendu le <?= date('d/m/Y', strtotime($emprunt['date_retour'])) ?>
+                                        </div>
                                     <?php else: ?>
                                         <div class="text-muted small">
                                             Rendu le <?= date('d/m/Y', strtotime($emprunt['date_retour'])) ?>
                                         </div>
+                                    <?php endif; ?>
+                                    <?php else: ?>
+                                         <span class="badge bg-warning">En cours</span>
                                     <?php endif; ?>
                                 </div>
                             </div>
