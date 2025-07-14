@@ -9,7 +9,7 @@
     <style>
         body {
             height: 100vh;
-            background-color: #a9adb1;
+            background-color:rgb(229, 231, 233);
             display: flex;
             justify-content: center;
             align-items: center;

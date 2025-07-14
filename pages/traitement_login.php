@@ -5,6 +5,9 @@ session_start();
 $email = $_POST['email'];
 $mdp = $_POST['mdp'];
 
+$id = getId($email);
+$_SESSION['id']=$id;
+
 verif($email,$mdp);
 
 ?>

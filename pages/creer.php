@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../asset/css/bootstrap.min.css">
     <style>
         body {
-              background-color: #a9adb1;
+              background-color:rgb(222, 223, 224);
             display: flex;
             justify-content: center;
             align-items: center;

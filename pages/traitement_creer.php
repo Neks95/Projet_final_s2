@@ -11,5 +11,7 @@ $ville = $_POST['ville'];
 $mdp = $_POST['mdp'];
 
 insert_membre($email, $mdp, $nom, $dtn, $ville, $genre, $defaut);
-
+$id = getId($email);
+$_SESSION['id']=$id;
+header("location:liste.php");
 ?>

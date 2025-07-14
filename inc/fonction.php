@@ -14,7 +14,14 @@ function getMembre()
 
     return $membre;
 }
-
+function getId($email){
+    $requete = "SELECT id_membre FROM projet_final_membre where email = '%s'";
+   
+    $requete = sprintf($requete,$email);
+    $result = mysqli_query(bdconnect(),$requete);
+    $ligne = mysqli_fetch_assoc($result);
+    return $ligne;
+}
 function insert_membre($email, $mdp, $nom, $date, $ville, $genre, $pdp)
 {
     $membre = getMembre();
@@ -80,5 +87,46 @@ function getCategorie()
     }
     return $cat;
 
+}
+
+function getDetail($id_objet){
+    $conn = bdconnect();
+    $requete = "SELECT o.*, c.nom_categorie, m.nom, m.ville, m.image_profil 
+                FROM projet_final_objet o
+                JOIN projet_final_categorie_objet c ON o.id_categorie = c.id_categorie
+                JOIN projet_final_membre m ON o.id_membre = m.id_membre
+                WHERE o.id_objet = %d";
+    $requete = sprintf($requete, $id_objet);
+    $result = mysqli_query($conn, $requete);
+    return mysqli_fetch_assoc($result);
+}
+
+
+function getImages($id_objet) {
+    $conn = bdconnect();
+    $requete = "SELECT * FROM projet_final_images_objet WHERE id_objet = %d";
+    $requete = sprintf($requete, $id_objet);
+    $result = mysqli_query($conn, $requete);
+    $images = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $images[] = $row;
+    }
+    return $images;
+}
+
+function getEmprunt($id_objet) {
+    $conn = bdconnect();
+    $requete = "SELECT e.*, m.nom, m.image_profil 
+                FROM projet_final_emprunt e
+                JOIN projet_final_membre m ON e.id_membre = m.id_membre
+                WHERE e.id_objet = %d
+                ORDER BY e.date_emprunt DESC";
+    $requete = sprintf($requete, $id_objet);
+    $result = mysqli_query($conn, $requete);
+    $history = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $history[] = $row;
+    }
+    return $history;
 }
 ?>
